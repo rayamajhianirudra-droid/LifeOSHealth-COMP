@@ -1,0 +1,27 @@
+.list-view {
+    -fx-background-color: #12122a;
+    -fx-border-color: #333;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.list-view .list-cell {
+    -fx-background-color: #12122a;
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-padding: 10 16;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: #1e1e40;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: #00e5ff;
+    -fx-text-fill: #0f0f1a;
+}
+
+.list-view .list-cell:empty {
+    -fx-background-color: #12122a;
+}

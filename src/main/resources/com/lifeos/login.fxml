@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.lifeos.controller.LoginController"
+      spacing="20" alignment="CENTER"
+      style="-fx-padding: 50 40; -fx-background-color: #0f0f1a;">
+
+    <!-- Logo area -->
+    <VBox alignment="CENTER" spacing="6">
+        <Text text="💪" style="-fx-font-size: 52;"/>
+        <Text text="LifeOS Health"
+              style="-fx-font-size: 30; -fx-fill: #00e5ff; -fx-font-weight: bold;"/>
+        <Text text="Your personal nutrition intelligence"
+              style="-fx-font-size: 13; -fx-fill: #555;"/>
+    </VBox>
+
+    <!-- User list -->
+    <VBox spacing="8" style="-fx-background-color: #1a1a2e; -fx-padding: 16; -fx-background-radius: 10;">
+        <Label text="SELECT PROFILE" style="-fx-text-fill: #555; -fx-font-size: 10; -fx-font-weight: bold;"/>
+        <ListView fx:id="userListView" prefHeight="160"
+                  style="-fx-background-color: #12122a; -fx-border-color: #333;
+                         -fx-border-radius: 6; -fx-background-radius: 6;"/>
+    </VBox>
+
+    <Label fx:id="statusLabel" style="-fx-text-fill: #ff4444; -fx-font-size: 12;"/>
+
+    <Button text="Login →" onAction="#handleLogin"
+            styleClass="primary-btn" maxWidth="Infinity"/>
+
+    <HBox spacing="10">
+        <Button text="+ New Profile" onAction="#handleNewProfile"
+                styleClass="secondary-btn" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+        <Button text="Delete Profile" onAction="#handleDeleteProfile"
+                styleClass="danger-btn" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+    </HBox>
+</VBox>

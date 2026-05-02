@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lifeos.controller.DashboardController"
+            style="-fx-background-color: #0f0f1a;">
+    <top>
+        <HBox style="-fx-background-color: #1a1a2e; -fx-padding: 14 24;
+                     -fx-alignment: CENTER_LEFT; -fx-spacing: 12;">
+            <Text text="LifeOS" style="-fx-font-size: 18; -fx-fill: #00e5ff; -fx-font-weight: bold;"/>
+            <Text text="Health" style="-fx-font-size: 18; -fx-fill: white; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="welcomeLabel" style="-fx-text-fill: #aaa; -fx-font-size: 13;"/>
+            <Label fx:id="dateLabel"    style="-fx-text-fill: #555; -fx-font-size: 12;"/>
+            <Button text="Logout" onAction="#handleLogout" styleClass="secondary-btn"
+                    style="-fx-padding: 5 14; -fx-font-size: 11;"/>
+        </HBox>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true"
+                    style="-fx-background: #0f0f1a; -fx-background-color: #0f0f1a;">
+            <VBox spacing="20" style="-fx-padding: 20;">
+
+                <!-- MACRO CARDS -->
+                <HBox spacing="12">
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                        <Label text="CALORIES" styleClass="card-label"/>
+                        <Label fx:id="targetCalLabel" styleClass="card-value"/>
+                        <Label text="Today" styleClass="card-sub"/>
+                        <Label fx:id="todayCalLabel" styleClass="card-today"/>
+                        <ProgressBar fx:id="calProgress" maxWidth="Infinity" styleClass="progress-cal"/>
+                    </VBox>
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                        <Label text="PROTEIN" styleClass="card-label"/>
+                        <Label fx:id="targetProteinLabel" styleClass="card-value"/>
+                        <Label text="Today" styleClass="card-sub"/>
+                        <Label fx:id="todayProteinLabel" styleClass="card-today"/>
+                        <ProgressBar fx:id="proteinProgress" maxWidth="Infinity" styleClass="progress-protein"/>
+                    </VBox>
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                        <Label text="CARBS" styleClass="card-label"/>
+                        <Label fx:id="targetCarbsLabel" styleClass="card-value"/>
+                        <Label text="Today" styleClass="card-sub"/>
+                        <Label fx:id="todayCarbsLabel" styleClass="card-today"/>
+                        <ProgressBar fx:id="carbsProgress" maxWidth="Infinity" styleClass="progress-carbs"/>
+                    </VBox>
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                        <Label text="FAT" styleClass="card-label"/>
+                        <Label fx:id="targetFatLabel" styleClass="card-value"/>
+                        <Label text="Today" styleClass="card-sub"/>
+                        <Label fx:id="todayFatLabel" styleClass="card-today"/>
+                        <ProgressBar fx:id="fatProgress" maxWidth="Infinity" styleClass="progress-fat"/>
+                    </VBox>
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                        <Label text="WATER" styleClass="card-label"/>
+                        <Label fx:id="targetWaterLabel" styleClass="card-value"/>
+                        <Label text="Today" styleClass="card-sub"/>
+                        <Label fx:id="todayWaterLabel" styleClass="card-today"/>
+                        <ProgressBar fx:id="waterProgress" maxWidth="Infinity" styleClass="progress-water"/>
+                    </VBox>
+                </HBox>
+
+                <!-- FOOD SEARCH -->
+                <VBox styleClass="panel" spacing="10">
+                    <Label text="Food Log — Search any food" styleClass="panel-title"/>
+                    <HBox spacing="8">
+                        <TextField fx:id="foodSearchField"
+                                   promptText="Type any food (e.g. chicken breast, banana, pizza)..."
+                                   styleClass="input-field" HBox.hgrow="ALWAYS"/>
+                        <Button text="Search + Add" onAction="#handleSearchFood"
+                                styleClass="primary-btn"/>
+                    </HBox>
+                    <Label fx:id="addFoodError"
+                           style="-fx-text-fill: #ffaa00; -fx-font-size: 11;"/>
+                    <TableView fx:id="foodTable" prefHeight="180">
+                        <columns>
+                            <TableColumn fx:id="foodNameCol" text="Food"  prefWidth="220"/>
+                            <TableColumn fx:id="calCol"      text="kcal"  prefWidth="70"/>
+                            <TableColumn fx:id="proteinCol"  text="P(g)"  prefWidth="65"/>
+                            <TableColumn fx:id="carbsCol"    text="C(g)"  prefWidth="65"/>
+                            <TableColumn fx:id="fatCol"      text="F(g)"  prefWidth="65"/>
+                        </columns>
+                    </TableView>
+                    <Button text="Remove Selected" onAction="#handleRemoveFood"
+                            styleClass="secondary-btn"/>
+                </VBox>
+
+                <!-- BOTTOM ROW -->
+                <HBox spacing="16">
+
+                    <!-- WATER -->
+                    <VBox styleClass="panel" prefWidth="160" spacing="10">
+                        <Label text="Log Water" styleClass="panel-title"/>
+                        <TextField fx:id="waterField" promptText="oz (e.g. 8)"
+                                   styleClass="input-field"/>
+                        <Button text="+ Add Water" onAction="#handleLogWater"
+                                styleClass="primary-btn" maxWidth="Infinity"/>
+                    </VBox>
+
+                    <!-- BODY FAT CALCULATOR -->
+                    <VBox styleClass="panel" HBox.hgrow="ALWAYS" spacing="8">
+                        <Label text="Body Fat Calculator" styleClass="panel-title"/>
+                        <Label text="Enter measurements in inches — app calculates your body fat %"
+                               style="-fx-text-fill: #555; -fx-font-size: 11;"/>
+                        <HBox spacing="8">
+                            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                <Label text="WEIGHT (lbs)" styleClass="card-label"/>
+                                <TextField fx:id="bodyWeightField" promptText="e.g. 175"
+                                           styleClass="input-field"/>
+                            </VBox>
+                            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                <Label text="NECK (inches)" styleClass="card-label"/>
+                                <TextField fx:id="neckField" promptText="e.g. 15"
+                                           styleClass="input-field"/>
+                            </VBox>
+                            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                <Label text="WAIST (inches)" styleClass="card-label"/>
+                                <TextField fx:id="waistField" promptText="e.g. 34"
+                                           styleClass="input-field"/>
+                            </VBox>
+                            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                <Label text="HIP (inches, females only)" styleClass="card-label"/>
+                                <TextField fx:id="hipField" promptText="e.g. 38"
+                                           styleClass="input-field"/>
+                            </VBox>
+                        </HBox>
+                        <Button text="Calculate Body Fat %" onAction="#handleCalculateBodyFat"
+                                styleClass="primary-btn"/>
+                        <HBox spacing="16" alignment="CENTER_LEFT">
+                            <VBox spacing="2">
+                                <Label text="BODY FAT %" styleClass="card-label"/>
+                                <Label fx:id="bodyFatResultLabel"
+                                       style="-fx-text-fill: #00e5ff; -fx-font-size: 22; -fx-font-weight: bold;"/>
+                            </VBox>
+                            <VBox spacing="2">
+                                <Label text="CATEGORY" styleClass="card-label"/>
+                                <Label fx:id="bodyFatCategoryLabel"
+                                       style="-fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold;"/>
+                            </VBox>
+                            <VBox spacing="2">
+                                <Label text="BMI ESTIMATE" styleClass="card-label"/>
+                                <Label fx:id="bmiEstimateLabel"
+                                       style="-fx-text-fill: #aaa; -fx-font-size: 13;"/>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                </HBox>
+
+                <!-- AI COACH -->
+                <VBox styleClass="panel" spacing="10">
+                    <Label text="AI Coach" styleClass="panel-title"/>
+                    <HBox spacing="16" alignment="CENTER_LEFT">
+                        <Label style="-fx-font-size: 56;">&#x1F4AA;</Label>
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                            <Label text="COACH SAYS:"
+                                   style="-fx-text-fill: #00e5ff; -fx-font-size: 10; -fx-font-weight: bold;"/>
+                            <Text fx:id="coachText" wrappingWidth="700"
+                                  style="-fx-fill: #ccc; -fx-font-size: 13; -fx-line-spacing: 4;"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

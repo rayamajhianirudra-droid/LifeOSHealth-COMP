@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.lifeos.controller.SetupController"
+      spacing="14" alignment="CENTER"
+      style="-fx-padding: 40; -fx-background-color: #0f0f1a;">
+
+    <Text text="LifeOS Health"
+          style="-fx-font-size: 28; -fx-fill: #00e5ff; -fx-font-weight: bold;"/>
+    <Text text="Set up your profile to get started"
+          style="-fx-font-size: 14; -fx-fill: #888;"/>
+
+    <TextField fx:id="nameField"   promptText="Your name"       styleClass="input-field"/>
+    <TextField fx:id="ageField"    promptText="Age"             styleClass="input-field"/>
+    <TextField fx:id="weightField" promptText="Weight (lbs)"    styleClass="input-field"/>
+
+    <HBox spacing="10">
+        <TextField fx:id="heightFeetField"   promptText="Height (feet)"   styleClass="input-field" HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="heightInchesField" promptText="Inches (0-11)"   styleClass="input-field" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <ComboBox fx:id="sexBox"      maxWidth="Infinity" styleClass="input-field"/>
+    <ComboBox fx:id="goalBox"     maxWidth="Infinity" styleClass="input-field"/>
+    <ComboBox fx:id="activityBox" maxWidth="Infinity" styleClass="input-field"/>
+
+    <Label fx:id="errorLabel" style="-fx-text-fill: #ff4444; -fx-font-size: 12;"/>
+
+    <Button text="Get Started →" onAction="#handleSave"
+            styleClass="primary-btn" maxWidth="Infinity"/>
+</VBox>
